@@ -5,12 +5,11 @@ import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // helpers
-import { deleteItem } from "../helpers";
+import { logOut } from "../helpers";
 
 export async function logoutAction() {
   // delete the user
-  deleteItem({ key: "userName" });
-  toast.success("You´ve deleted your account");
-  // return redirect
+  await logOut({ key: "userEmail" });
+  toast.success("You´ve logged out from your account");
   return redirect("/");
 }

@@ -35,7 +35,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  console.log(process.env);
   return (
     <div className="App">
       <RouterProvider router={router} />

@@ -1,21 +1,28 @@
+// react imports
+import { useState, useEffect } from "react";
+
 // rrd imports
 import { useLoaderData } from "react-router-dom";
+
+// firebase imports
+import { auth } from "../firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
 
 // Components
 import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
 
 // helper functions
-import { createBudget, fetchData } from "../helpers";
+import { createBudget, fetchData, registerUser } from "../helpers";
 
 // Library
 import { toast } from "react-toastify";
 
 // loader
 export function dashboardLoader() {
-  const userName = fetchData("userName");
+  const userEmail = fetchData("userEmail");
   const budgets = fetchData("budgets");
-  return { userName };
+  return { userEmail };
 }
 
 // action
@@ -26,8 +33,9 @@ export async function dashboardAction({ request }) {
   // new user submission
   if (_action === "newUser") {
     try {
-      localStorage.setItem("userName", JSON.stringify(values.userName));
-      return toast.success(`Welcome, ${values.userName}`);
+      const user = await registerUser(values.userEmail, values.userPassword);
+      localStorage.setItem("userEmail", JSON.stringify(user.user.email));
+      return toast.success(`Welcome, ${values.userEmail}`);
     } catch (error) {
       throw new Error("There was a problem creating your account");
     }
@@ -50,14 +58,26 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const { userName, budgets } = useLoaderData();
+  const [userIsLoggedIn, setuserIsLoggedIn] = useState(false);
+  const { userEmail, budgets } = useLoaderData();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (loggedInUser) => {
+      console.log("loggedInUser :>> ", loggedInUser);
+      if (loggedInUser) {
+        setuserIsLoggedIn(true);
+      } else {
+        setuserIsLoggedIn(false);
+      }
+    });
+  }, []);
 
   return (
     <>
-      {userName ? (
+      {userIsLoggedIn ? (
         <div className="dashboard">
           <h1>
-            Welcome back, <span className="accent">{userName}</span>
+            Welcome back, <span className="accent">{userEmail}</span>
           </h1>
           <div className="grid--sm">
             {/* {budgets ? () : ()} */}

@@ -7,26 +7,26 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 // assets
 import logomark from "../assets/logomark.svg";
 
-const Nav = ({ userName }) => {
+const Nav = ({ userEmail }) => {
   return (
     <nav>
       <NavLink to="/" aria-label="Go to home">
         <img src={logomark} alt="" height={30} />
-        <span>HomeBudget</span>
+        <span>OnlineZoukSchool</span>
       </NavLink>
-      {userName && (
+      {userEmail && (
         <Form
           method="post"
           action="logout"
           onSubmit={(event) => {
             // eslint-disable-next-line no-restricted-globals
-            if (!confirm("Delete user and all data?")) {
+            if (!confirm("Logout from your account?")) {
               event.preventDefault();
             }
           }}
         >
           <button type="submit" className="btn btn--warning">
-            <span>Delete User</span>
+            <span>Logout</span>
             <TrashIcon width={20} />
           </button>
         </Form>

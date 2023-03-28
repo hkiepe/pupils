@@ -1,7 +1,28 @@
+// fb imports
+import { auth } from "./firebase-config";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+
 // fb auth functions
-const register = async () => {};
-const login = async () => {};
-const logout = async () => {};
+export const registerUser = async (userEmail, userPassword) => {
+  try {
+    const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword);
+    return user;
+  } catch (error) {
+    throw new Error("There was a problem creating your account");
+  }
+};
+
+const loginUser = async () => {};
+
+const logoutUser = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    throw new Error("There was a problem signing out from your account");
+  }
+};
+
+const deleteUser = async () => {};
 
 // generates a random olor
 const generateRandomColor = () => {
@@ -28,7 +49,8 @@ export const createBudget = ({ name, amount }) => {
   return localStorage.setItem("budgets", JSON.stringify([...existingBudgets, newItem]));
 };
 
-// delete item
-export const deleteItem = ({ key }) => {
+// logout user
+export const logOut = async ({ key }) => {
+  await logoutUser();
   return localStorage.removeItem(key);
 };

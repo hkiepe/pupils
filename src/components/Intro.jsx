@@ -12,11 +12,12 @@ function Intro() {
     <div className="intro">
       <div>
         <h1>
-          Take control of <span className="accent">Your Money</span>
+          Take responsibility for <span className="accent">Your Dance</span>
         </h1>
-        <p>Personal budgeting is the secret to financial freedom. Start your journey today.</p>
+        <p>Home training is the secret for growth into your dance. Start your journey today.</p>
         <Form method="post">
-          <input type="text" name="userName" required placeholder="What is your name" aria-label="Your name" autoComplete="given-name" />
+          <input type="email" name="userEmail" required placeholder="What is your email?" aria-label="Your email" autoComplete="given-email" />
+          <input type="password" name="userPassword" required placeholder="Type your password!" aria-label="Your password" />
           <input type="hidden" name="_action" value="newUser" />
           <button type="submit" className="btn btn--dark">
             <span>Create Account</span>

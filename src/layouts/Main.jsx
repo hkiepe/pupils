@@ -11,16 +11,16 @@ import Nav from "../components/Nav";
 import { fetchData } from "../helpers";
 
 export function mainLoader() {
-  const userName = fetchData("userName");
-  return { userName };
+  const userEmail = fetchData("userEmail");
+  return { userEmail };
 }
 
 const Main = () => {
-  const { userName } = useLoaderData();
+  const { userEmail } = useLoaderData();
 
   return (
     <div className="layout">
-      <Nav userName={userName} />
+      <Nav userEmail={userEmail} />
       <main>
         <Outlet />
       </main>
