@@ -63,7 +63,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (loggedInUser) => {
-      console.log("loggedInUser :>> ", loggedInUser);
       if (loggedInUser) {
         setuserIsLoggedIn(true);
       } else {
