@@ -1,3 +1,6 @@
+// react imports
+import { useState } from "react";
+
 // rrd imports
 import { Form } from "react-router-dom";
 
@@ -8,6 +11,10 @@ import { UserPlusIcon } from "@heroicons/react/24/solid";
 import illustration from "../assets/illustration.jpg";
 
 function Intro() {
+  const [register, setRegister] = useState(false);
+
+  const handleCheckbox = () => setRegister(!register);
+
   return (
     <div className="intro">
       <div>
@@ -18,9 +25,18 @@ function Intro() {
         <Form method="post">
           <input type="email" name="userEmail" required placeholder="What is your email?" aria-label="Your email" autoComplete="given-email" />
           <input type="password" name="userPassword" required placeholder="Type your password!" aria-label="Your password" />
-          <input type="hidden" name="_action" value="newUser" />
+          <input type="hidden" name="_action" value={register ? "_registerUser" : "_loginUser"} />
+          <input
+            type="checkbox"
+            name="register"
+            placeholder="Do you want to register?"
+            aria-label="Register"
+            autoComplete="false"
+            checked={register}
+            onChange={handleCheckbox}
+          />
           <button type="submit" className="btn btn--dark">
-            <span>Create Account</span>
+            <span>{register ? "Create Account" : "Log In"}</span>
             <UserPlusIcon width={20} />
           </button>
         </Form>

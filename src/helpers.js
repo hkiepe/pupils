@@ -1,6 +1,6 @@
 // fb imports
 import { auth } from "./firebase-config";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 // fb auth functions
 export const registerUser = async (userEmail, userPassword) => {
@@ -12,7 +12,14 @@ export const registerUser = async (userEmail, userPassword) => {
   }
 };
 
-const loginUser = async () => {};
+export const loginUser = async (userEmail, userPassword) => {
+  try {
+    const user = await signInWithEmailAndPassword(auth, userEmail, userPassword);
+    return user;
+  } catch (error) {
+    throw new Error("There was a problem creating your account");
+  }
+};
 
 const logoutUser = async () => {
   try {

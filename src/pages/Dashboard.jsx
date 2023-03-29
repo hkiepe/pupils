@@ -13,7 +13,7 @@ import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
 
 // helper functions
-import { createBudget, fetchData, registerUser } from "../helpers";
+import { createBudget, fetchData, registerUser, loginUser } from "../helpers";
 
 // Library
 import { toast } from "react-toastify";
@@ -30,14 +30,25 @@ export async function dashboardAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
 
-  // new user submission
-  if (_action === "newUser") {
+  // register user submission
+  if (_action === "_registerUser") {
     try {
       const user = await registerUser(values.userEmail, values.userPassword);
       localStorage.setItem("userEmail", JSON.stringify(user.user.email));
       return toast.success(`Welcome, ${values.userEmail}`);
     } catch (error) {
       throw new Error("There was a problem creating your account");
+    }
+  }
+
+  // register user submission
+  if (_action === "_loginUser") {
+    try {
+      const user = await loginUser(values.userEmail, values.userPassword);
+      localStorage.setItem("userEmail", JSON.stringify(user.user.email));
+      return toast.success(`Welcome, ${values.userEmail}`);
+    } catch (error) {
+      throw new Error("There was a problem login to your account");
     }
   }
 
