@@ -11,6 +11,7 @@ import { onAuthStateChanged } from "firebase/auth";
 // Components
 import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
+import MovieList from "../components/MovieList";
 
 // helper functions
 import { createBudget, fetchData, registerUser, loginUser } from "../helpers";
@@ -93,7 +94,8 @@ const Dashboard = () => {
             {/* {budgets ? () : ()} */}
             <div className="grid-lg">
               <div className="flex-lg">
-                <AddBudgetForm />
+                {/* <AddBudgetForm /> */}
+                <MovieList />
               </div>
             </div>
           </div>
