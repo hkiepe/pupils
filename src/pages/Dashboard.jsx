@@ -94,7 +94,6 @@ const Dashboard = () => {
             {/* {budgets ? () : ()} */}
             <div className="grid-lg">
               <div className="flex-lg">
-                {/* <AddBudgetForm /> */}
                 <MovieList />
               </div>
             </div>

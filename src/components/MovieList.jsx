@@ -10,8 +10,12 @@ import { getDocs, collection } from "firebase/firestore";
 
 // library imports
 import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
+import PaypalCheckoutButton from "./PaypalCheckoutButton";
 
-const AddBudgetForm = () => {
+// Paypal Imports
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
+const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
 
   const moviesCollectionRef = collection(db, "movies");
@@ -30,18 +34,22 @@ const AddBudgetForm = () => {
     getMovieList();
   }, []);
 
+  
+
   return (
     <div className="form-wrapper">
       <h2 className="h3">Movie List</h2>
       {movieList &&
         movieList.map((movie) => (
           <div>
-            <h3>{movie.title}</h3>
-            <p>{movie.releaseDate}</p>
+            <h3>Title: {movie.title}</h3>
+            <p>Release Date: {movie.releaseDate}</p>
+            <p>Price: {movie.price}</p>
+              <PaypalCheckoutButton movie={movie} />
           </div>
         ))}
     </div>
   );
 };
 
-export default AddBudgetForm;
+export default MovieList;
