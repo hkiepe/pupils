@@ -15,6 +15,9 @@ import Main, { mainLoader } from "./layouts/Main";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import Error from "./pages/Error";
 
+// Paypal imports
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,11 +37,19 @@ const router = createBrowserRouter([
   },
 ]);
 
+const initialOptions = {
+  "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+  currency: "EUR",
+  components: "buttons",
+};
+
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router} />
-      <ToastContainer />
+      <PayPalScriptProvider options={initialOptions}>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </PayPalScriptProvider>
     </div>
   );
 }
