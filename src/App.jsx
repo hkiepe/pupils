@@ -41,6 +41,9 @@ const initialOptions = {
   "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
   currency: "EUR",
   components: "buttons",
+  // "card", "credit", "giropa", "sofort", "sepa", "paylater"
+  "disable-funding": ["card", "giropay", "sepa", "sofort"],
+  // "enable-funding": []
 };
 
 function App() {
