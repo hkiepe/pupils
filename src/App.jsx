@@ -8,6 +8,9 @@ import { logoutAction } from "./actions/logout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// Video extension
+import 'video-react/dist/video-react.css';
+
 // Layouts
 import Main, { mainLoader } from "./layouts/Main";
 
