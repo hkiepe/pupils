@@ -15,6 +15,9 @@ import PaypalCheckoutButton from "./PaypalCheckoutButton";
 // Paypal Imports
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
+// Video player
+import { Player } from 'video-react';
+
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
 
@@ -45,7 +48,10 @@ const MovieList = () => {
             <h3>Title: {movie.title}</h3>
             <p>Release Date: {movie.releaseDate}</p>
             <p>Price: {movie.price}</p>
-              <PaypalCheckoutButton movie={movie} />
+            <Player>
+                  <source src={movie.videoUrl} />
+            </Player>
+            <PaypalCheckoutButton movie={movie} />
           </div>
         ))}
     </div>

@@ -19,9 +19,6 @@ import { createBudget, fetchData, registerUser, loginUser } from "../helpers";
 // Library
 import { toast } from "react-toastify";
 
-// video player
-import { Player } from 'video-react';
-
 // loader
 export function dashboardLoader() {
   const userEmail = fetchData("userEmail");
@@ -90,17 +87,11 @@ const Dashboard = () => {
     <>
       {userIsLoggedIn ? (
         <div className="dashboard">
-          <h1>
-            Welcome back, <span className="accent">{userEmail}</span>
-          </h1>
           <div className="grid--sm">
             {/* {budgets ? () : ()} */}
             <div className="grid-lg">
               <div className="flex-lg">
                 <MovieList />
-                <Player>
-      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-    </Player>
               </div>
             </div>
           </div>
