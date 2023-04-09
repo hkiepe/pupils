@@ -40,11 +40,11 @@ const MovieList = () => {
   
 
   return (
-    <div className="form-wrapper">
+    <div >
       <h2 className="h3">Movie List</h2>
       {movieList &&
         movieList.map((movie) => (
-          <div>
+          <div className="form-wrapper">
             <h3>Title: {movie.title}</h3>
             <p>Release Date: {movie.releaseDate}</p>
             <p>Price: {movie.price}</p>
