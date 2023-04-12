@@ -61,3 +61,11 @@ export const logOut = async ({ key }) => {
   await logoutUser();
   return localStorage.removeItem(key);
 };
+
+export const createUserInFirestore = async (user) => {
+  try {
+    // Todo: create the firestore user after user signup
+  } catch (error) {
+    throw new Error("There was a problem creating the user.");
+  }
+}
