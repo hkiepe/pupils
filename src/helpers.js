@@ -1,5 +1,6 @@
 // fb imports
-import { auth } from "./firebase-config";
+import { collection, addDoc } from "firebase/firestore";
+import { auth, db } from "./firebase-config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 // fb auth functions
@@ -63,8 +64,9 @@ export const logOut = async ({ key }) => {
 };
 
 export const createUserInFirestore = async (user) => {
+  console.log("user: ", user)
   try {
-    // Todo: create the firestore user after user signup
+    await addDoc(collection(db, "users"), {email: "test@test.de", authId: "12345xyz"})
   } catch (error) {
     throw new Error("There was a problem creating the user.");
   }
