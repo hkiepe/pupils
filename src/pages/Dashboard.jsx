@@ -14,7 +14,7 @@ import AddBudgetForm from "../components/AddBudgetForm";
 import MovieList from "../components/MovieList";
 
 // helper functions
-import { createBudget, fetchData, registerUser, loginUser } from "../helpers";
+import { createBudget, fetchData, registerUser, loginUser, createUserInFirestore } from "../helpers";
 
 // Library
 import { toast } from "react-toastify";
@@ -35,6 +35,7 @@ export async function dashboardAction({ request }) {
   if (_action === "_registerUser") {
     try {
       const user = await registerUser(values.userEmail, values.userPassword);
+      const userTable = await createUserInFirestore(user)
       localStorage.setItem("userEmail", JSON.stringify(user.user.email));
       return toast.success(`Welcome, ${values.userEmail}`);
     } catch (error) {

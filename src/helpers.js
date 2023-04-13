@@ -64,9 +64,8 @@ export const logOut = async ({ key }) => {
 };
 
 export const createUserInFirestore = async (user) => {
-  console.log("user: ", user)
   try {
-    await addDoc(collection(db, "users"), {email: "test@test.de", authId: "12345xyz"})
+    await addDoc(collection(db, "users"), {email: user.email, authId: user.uid})
   } catch (error) {
     throw new Error("There was a problem creating the user.");
   }

@@ -17,9 +17,6 @@ function PaypalCheckoutButton({ movie }) {
     });
   }, []);
 
-  console.log("movie :>> ", movie);
-  console.log("price :>> ", +movie.price);
-
   return (
     <PayPalButtons
       createOrder={(data, actions) => {
