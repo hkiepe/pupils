@@ -35,9 +35,9 @@ export async function dashboardAction({ request }) {
   if (_action === "_registerUser") {
     try {
       const user = await registerUser(values.userEmail, values.userPassword);
-      const userTable = await createUserInFirestore(user)
-      localStorage.setItem("userEmail", JSON.stringify(user.user.email));
-      return toast.success(`Welcome, ${values.userEmail}`);
+      const userTable = await createUserInFirestore(user, values.userName)
+      localStorage.setItem("userName", JSON.stringify(values.userName));
+      return toast.success(`Welcome, ${values.userName}`);
     } catch (error) {
       throw new Error("There was a problem creating your account");
     }

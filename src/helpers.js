@@ -63,10 +63,11 @@ export const logOut = async ({ key }) => {
   return localStorage.removeItem(key);
 };
 
-export const createUserInFirestore = async (user) => {
+export const createUserInFirestore = async ({user}, userName) => {
+  console.log(userName)
   try {
-    await addDoc(collection(db, "users"), {email: user.email, authId: user.uid})
+    await addDoc(collection(db, "users"), {userName: userName, email: user.email, authId: user.uid})
   } catch (error) {
-    throw new Error("There was a problem creating the user.");
+    throw new Error("There was a problem creating the user in the users collection.");
   }
 }

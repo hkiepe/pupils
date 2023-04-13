@@ -35,6 +35,7 @@ function Intro() {
         </h1>
         <p>Home training is the secret for growth into your dance. Start your journey today.</p>
         <Form method="post">
+          <input type="name" name="userName" required placeholder="What is your name?" aria-label="Your name" autoComplete="given-name" />
           <input type="email" name="userEmail" required placeholder="What is your email?" aria-label="Your email" autoComplete="given-email" />
           <input type="password" name="userPassword" required placeholder="Type your password!" aria-label="Your password" />
           <input type="hidden" name="_action" value={register ? "_registerUser" : "_loginUser"} />
