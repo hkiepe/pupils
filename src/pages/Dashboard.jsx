@@ -29,18 +29,17 @@ export async function dashboardAction({ request }) {
     try {
       const user = await registerUser(values.userEmail, values.userPassword);
       const userTable = await createUserInFirestore(user, values.userName)
-      localStorage.setItem("userName", JSON.stringify(values.userName));
       return toast.success(`Welcome, ${values.userName}`);
     } catch (error) {
       throw new Error("There was a problem creating your account");
     }
   }
 
-  // register user submission
+  // login user submission
   if (_action === "_loginUser") {
     try {
       const user = await loginUser(values.userEmail, values.userPassword);
-      localStorage.setItem("userEmail", JSON.stringify(user.user.email));
+      console.log('user', user)
       return toast.success(`Welcome, ${values.userEmail}`);
     } catch (error) {
       throw new Error("There was a problem login to your account");
@@ -68,7 +67,6 @@ const Dashboard = () => {
 
   return (
     <>
-    {console.log('context', context)}
       {context.loggedInUser.isLoggedIn ? (
         <div className="dashboard">
           <div className="grid--sm">
