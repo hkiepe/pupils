@@ -1,5 +1,5 @@
 // fb imports
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "./firebase-config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
@@ -32,7 +32,7 @@ const logoutUser = async () => {
 
 const deleteUser = async () => {};
 
-// generates a random olor
+// generates a random color
 const generateRandomColor = () => {
   const existingBudgetLength = fetchData("budgets")?.length ?? 0;
   return `${existingBudgetLength * 34} 65% 50%`;
@@ -41,6 +41,12 @@ const generateRandomColor = () => {
 // Local storage
 export const fetchData = (key) => {
   return JSON.parse(localStorage.getItem(key));
+};
+
+// get user data from firebase
+export const fetchUserData = async (uid) => {
+  const userDoc = await getDoc(doc(db, "users", uid));
+  return userDoc.data()
 };
 
 // create budget
@@ -64,9 +70,8 @@ export const logOut = async ({ key }) => {
 };
 
 export const createUserInFirestore = async ({user}, userName) => {
-  console.log(userName)
   try {
-    await addDoc(collection(db, "users"), {userName: userName, email: user.email, authId: user.uid})
+    await setDoc(doc(collection(db, "users"), user.uid), {userName: userName, email: user.email, authId: user.uid})
   } catch (error) {
     throw new Error("There was a problem creating the user in the users collection.");
   }

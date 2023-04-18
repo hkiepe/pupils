@@ -20,7 +20,7 @@ const Main = () => {
 
   return (
     <div className="layout">
-      <Nav userEmail={userEmail} />
+      <Nav />
       <main>
         <Outlet />
       </main>

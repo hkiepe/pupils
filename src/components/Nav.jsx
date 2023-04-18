@@ -1,5 +1,11 @@
+// react imports
+import {useContext} from "react"
+
 // rrd imports
 import { Form, NavLink } from "react-router-dom";
+
+// Context
+import AuthContext from "../context/auth-context";
 
 // library
 import { TrashIcon } from "@heroicons/react/24/solid";
@@ -7,14 +13,16 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 // assets
 import logomark from "../assets/logomark.svg";
 
-const Nav = ({ userEmail }) => {
+const Nav = () => {
+  const context = useContext(AuthContext)
+
   return (
     <nav>
       <NavLink to="/" aria-label="Go to home">
         <img src={logomark} alt="" height={30} />
         <span>OnlineZoukSchool</span>
       </NavLink>
-      {userEmail && (
+      {context.loggedInUser.isLoggedIn && (
         <Form
           method="post"
           action="logout"

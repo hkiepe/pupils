@@ -37,8 +37,6 @@ const MovieList = () => {
     getMovieList();
   }, []);
 
-  
-
   return (
     <div >
       <h2 className="h3">Movie List</h2>

@@ -33,6 +33,8 @@ function PaypalCheckoutButton({ movie }) {
       }}
       onApprove={(data, actions) => {
         return actions.order.capture().then((details) => {
+
+          // save into user in database which video he has payed
           const name = "Henrik";
           alert(`Transaction completed by ${name}`);
         });

@@ -1,16 +1,8 @@
 // react imports
-import { useState, useEffect } from "react";
-
-// rrd imports
-import { useLoaderData } from "react-router-dom";
-
-// firebase imports
-import { auth } from "../firebase-config";
-import { onAuthStateChanged } from "firebase/auth";
+import {useContext} from "react"
 
 // Components
 import Intro from "../components/Intro";
-import AddBudgetForm from "../components/AddBudgetForm";
 import MovieList from "../components/MovieList";
 
 // helper functions
@@ -18,6 +10,7 @@ import { createBudget, fetchData, registerUser, loginUser, createUserInFirestore
 
 // Library
 import { toast } from "react-toastify";
+import AuthContext from "../context/auth-context";
 
 // loader
 export function dashboardLoader() {
@@ -71,22 +64,12 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const [userIsLoggedIn, setuserIsLoggedIn] = useState(false);
-  const { userEmail, budgets } = useLoaderData();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (loggedInUser) => {
-      if (loggedInUser) {
-        setuserIsLoggedIn(true);
-      } else {
-        setuserIsLoggedIn(false);
-      }
-    });
-  }, []);
+  const context = useContext(AuthContext)
 
   return (
     <>
-      {userIsLoggedIn ? (
+    {console.log('context', context)}
+      {context.loggedInUser.isLoggedIn ? (
         <div className="dashboard">
           <div className="grid--sm">
             {/* {budgets ? () : ()} */}
