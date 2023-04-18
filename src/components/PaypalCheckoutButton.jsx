@@ -1,11 +1,18 @@
 // react imports
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+
+// context
+import AuthContext from "../context/auth-context";
 
 // paypal Imports
 import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
+// Library
+import { toast } from "react-toastify";
+
 function PaypalCheckoutButton({ movie }) {
   const [{ options }, dispatch] = usePayPalScriptReducer();
+  const context = useContext(AuthContext)
 
   useEffect(() => {
     dispatch({
@@ -33,10 +40,8 @@ function PaypalCheckoutButton({ movie }) {
       }}
       onApprove={(data, actions) => {
         return actions.order.capture().then((details) => {
-
           // save into user in database which video he has payed
-          const name = "Henrik";
-          alert(`Transaction completed by ${name}`);
+          toast.success(`Transaction completed by ${details.payer.name.given_name} ${details.payer.name.surname}, Id: ${details.payer.payer_id}`)
         });
       }}
     />
