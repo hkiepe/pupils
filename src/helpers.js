@@ -16,7 +16,8 @@ export const registerUser = async (userEmail, userPassword) => {
 export const loginUser = async (userEmail, userPassword) => {
   try {
     const user = await signInWithEmailAndPassword(auth, userEmail, userPassword);
-    return user;
+    const userDoc = await getDoc(doc(db, "users", user.user.uid));
+    return userDoc.data();
   } catch (error) {
     throw new Error("There was a problem creating your account");
   }

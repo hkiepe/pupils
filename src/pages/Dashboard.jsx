@@ -39,8 +39,7 @@ export async function dashboardAction({ request }) {
   if (_action === "_loginUser") {
     try {
       const user = await loginUser(values.userEmail, values.userPassword);
-      console.log('user', user)
-      return toast.success(`Welcome, ${values.userEmail}`);
+      return toast.success(`Welcome, ${user.userName}`);
     } catch (error) {
       throw new Error("There was a problem login to your account");
     }

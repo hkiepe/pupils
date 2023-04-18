@@ -74,7 +74,6 @@ function App() {
         // get the logged in user data from user table in firestore
         try {
         const userData = await fetchUserData(authUser.uid)
-        console.log('userData', userData)
         setLoggedInUser({ isLoggedIn: true, userData })
         } catch (error) {
           throw new Error("There was a problem fetching the user data");
