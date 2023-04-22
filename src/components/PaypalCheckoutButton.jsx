@@ -5,12 +5,11 @@ import { useEffect, useContext } from "react";
 import AuthContext from "../context/auth-context";
 
 // fb imports
-import { collection, addDoc, doc, arrayUnion, updateDoc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "../firebase-config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { collection, addDoc, doc, arrayUnion, updateDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
 
 // paypal Imports
-import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 // Library
 import { toast } from "react-toastify";
@@ -45,12 +44,8 @@ function PaypalCheckoutButton({ movie }) {
       }}
       onApprove={(data, actions) => {
         return actions.order.capture().then((details) => {
-          console.log('details', details)
-          console.log('movie', movie)
-          console.log('context', context)
-
-          
-          
+          // TODO: swap firestore funtions to a central place and wrap async/await with in try/catch
+          // block
           // update user entry with purchased courses
           const usersRef = doc(db, "users", context.loggedInUser.userData.authId);
           updateDoc(usersRef, {

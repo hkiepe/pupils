@@ -64,10 +64,6 @@ const initialOptions = {
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({ isLoggedIn: false, userData: {} })
 
-  const logoutHandler = () => {
-    // logout user in authö
-  }
-
   useEffect(() => {
     onAuthStateChanged(auth, async (authUser) => {
       if (authUser) {
@@ -88,7 +84,6 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{
           loggedInUser: { isLoggedIn: loggedInUser.isLoggedIn, userData: loggedInUser.userData },
-          onLogout: logoutHandler,
         }}>
         <PayPalScriptProvider options={initialOptions}>
           <RouterProvider router={router} />

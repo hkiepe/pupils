@@ -55,11 +55,11 @@ function Intro() {
             <UserPlusIcon width={20} />
           </button>
         </Form>
-        <p>Or sign in with google:</p>
+        {/* <p>Or sign in with google:</p>
         <button onClick={signInWithGoogle} type="submit" className="btn btn--dark">
           <span>Sign in with google</span>
           <UserPlusIcon width={20} />
-        </button>
+        </button> */}
       </div>
       <img src={illustration} alt="Person width money" width={600} />
     </div>

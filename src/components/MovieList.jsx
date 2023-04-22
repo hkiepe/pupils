@@ -1,12 +1,12 @@
 // react imports
-import { useState, useEffect } from "react";
-
-// rrd imports
-import { Form } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 
 // firebase imports
 import { db } from "../firebase-config";
 import { getDocs, collection } from "firebase/firestore";
+
+// context
+import AuthContext from "../context/auth-context";
 
 // library imports
 import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
@@ -20,6 +20,7 @@ import { Player } from 'video-react';
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
+  const context = useContext(AuthContext)
 
   const moviesCollectionRef = collection(db, "movies");
 
@@ -41,17 +42,29 @@ const MovieList = () => {
     <div >
       <h2 className="h3">Movie List</h2>
       {movieList &&
-        movieList.map((movie) => (
-          <div className="form-wrapper">
-            <h3>Title: {movie.title}</h3>
-            <p>Release Date: {movie.releaseDate}</p>
-            <p>Price: {movie.price}</p>
-            <Player>
-                  <source src={movie.videoUrl} />
-            </Player>
-            <PaypalCheckoutButton movie={movie} />
-          </div>
-        ))}
+        movieList.map((movie) => {
+          console.log('movie', movie)
+          console.log('context', context)
+          if (context.loggedInUser.userData.purchasedCourses.filter(course => {
+            console.log('COURSE', course)
+            return (course.course !== movie.id)})) {
+            return (<div className="form-wrapper">
+              <h3>Title: {movie.title}</h3>
+              <p>Price: {movie.price}</p>
+              <Player>
+                    <source src={movie.trailerUrl} />
+              </Player>
+              <PaypalCheckoutButton movie={movie} />
+            </div>)
+          } else {
+            return (<div className="form-wrapper">
+              <h3>Title: {movie.title}</h3>
+              <Player>
+                    <source src={movie.videoUrl} />
+              </Player>
+            </div>)
+          }
+        })}
     </div>
   );
 };
