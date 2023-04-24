@@ -43,11 +43,16 @@ const MovieList = () => {
       <h2 className="h3">Movie List</h2>
       {movieList &&
         movieList.map((movie) => {
-          console.log('movie', movie)
-          console.log('context', context)
-          if (context.loggedInUser.userData.purchasedCourses.filter(course => {
-            console.log('COURSE', course)
-            return (course.course !== movie.id)})) {
+          console.log('purchasedCourses', context.loggedInUser.userData.purchasedCourses)
+
+          if (context.loggedInUser.userData.purchasedCourses.filter(course => course.course === movie.id).length > 0) {
+            return (<div className="form-wrapper">
+              <h3>Title: {movie.title}</h3>
+              <Player>
+                    <source src={movie.videoUrl} />
+              </Player>
+            </div>)
+          } else {
             return (<div className="form-wrapper">
               <h3>Title: {movie.title}</h3>
               <p>Price: {movie.price}</p>
@@ -55,13 +60,6 @@ const MovieList = () => {
                     <source src={movie.trailerUrl} />
               </Player>
               <PaypalCheckoutButton movie={movie} />
-            </div>)
-          } else {
-            return (<div className="form-wrapper">
-              <h3>Title: {movie.title}</h3>
-              <Player>
-                    <source src={movie.videoUrl} />
-              </Player>
             </div>)
           }
         })}
