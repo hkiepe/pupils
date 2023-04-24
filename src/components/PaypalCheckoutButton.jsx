@@ -6,13 +6,14 @@ import AuthContext from "../context/auth-context";
 
 // fb imports
 import { collection, addDoc, doc, arrayUnion, updateDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
 // paypal Imports
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 // Library
 import { toast } from "react-toastify";
+import { fetchUserData } from "../helpers";
 
 function PaypalCheckoutButton({ movie }) {
   const [{ options }, dispatch] = usePayPalScriptReducer();
@@ -56,6 +57,9 @@ function PaypalCheckoutButton({ movie }) {
           addDoc(collection(db, "purchases"), {
             details: details, course: movie, user: context.loggedInUser.userData
           })
+
+          // reload Data
+          fetchUserData(auth.currentUser.uid)
 
           // save into user in database which video was payed
           toast.success(`Transaction completed by ${details.payer.name.given_name} ${details.payer.name.surname}, Id: ${details.payer.payer_id}`)
