@@ -61,6 +61,10 @@ const initialOptions = {
   // "enable-funding": []
 };
 
+const reloadData = () => {
+  
+}
+
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({ isLoggedIn: false, userData: {} })
 
@@ -84,6 +88,7 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{
           loggedInUser: { isLoggedIn: loggedInUser.isLoggedIn, userData: loggedInUser.userData },
+          reloadData: reloadData
         }}>
         <PayPalScriptProvider options={initialOptions}>
           <RouterProvider router={router} />
