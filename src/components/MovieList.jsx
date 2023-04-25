@@ -44,20 +44,26 @@ const MovieList = () => {
       {movieList &&
         movieList.map((movie) => {
           console.log('purchasedCourses', context.loggedInUser.userData.purchasedCourses)
-
-          if (context.loggedInUser.userData.purchasedCourses.filter(course => course.course === movie.id).length > 0) {
-            return (<div className="form-wrapper">
-              <h3>Title: {movie.title}</h3>
-              <iframe width="560" height="315" src={movie.videoUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>)
-          } else {
-            return (<div className="form-wrapper">
-              <h3>Title: {movie.title}</h3>
-              <p>Price: {movie.price}</p>
-              <iframe width="560" height="315" src={movie.trailerUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              <PaypalCheckoutButton movie={movie} />
-            </div>)
-          }
+          if (context.loggedInUser.userData.purchasedCourses) {
+            if (context.loggedInUser.userData.purchasedCourses.filter(course => course.course === movie.id).length > 0) {
+              return (<div className="form-wrapper">
+                <h3>Title: {movie.title}</h3>
+                <iframe width="560" height="315" src={movie.videoUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </div>)
+            } else {
+              return (<div className="form-wrapper">
+                <h3>Title: {movie.title}</h3>
+                <p>Price: {movie.price}</p>
+                <iframe width="560" height="315" src={movie.trailerUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <PaypalCheckoutButton movie={movie} />
+              </div>)
+            }
+          } else {return (<div className="form-wrapper">
+          <h3>Title: {movie.title}</h3>
+          <p>Price: {movie.price}</p>
+          <iframe width="560" height="315" src={movie.trailerUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <PaypalCheckoutButton movie={movie} />
+        </div>)}
         })}
     </div>
   );
