@@ -3,7 +3,7 @@ import {useContext} from "react"
 
 // Components
 import Intro from "../components/Intro";
-import MovieList from "../components/MovieList";
+import CourseList from "../components/CourseList";
 
 // helper functions
 import { createBudget, fetchData, registerUser, loginUser, createUserInFirestore } from "../helpers";
@@ -74,7 +74,7 @@ const Dashboard = () => {
             {/* {budgets ? () : ()} */}
             <div className="grid-lg">
               <div className="flex-lg">
-                <MovieList />
+                <CourseList />
               </div>
             </div>
           </div>
