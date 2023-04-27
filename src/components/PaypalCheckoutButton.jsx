@@ -50,6 +50,7 @@ function PaypalCheckoutButton({ movie }) {
           // update user entry with purchased courses
           const usersRef = doc(db, "users", context.loggedInUser.userData.authId);
           updateDoc(usersRef, {
+            // Test
             purchasedCourses: arrayUnion({course: movie.id, purchaseId: details.id})
           });
 
