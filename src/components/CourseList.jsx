@@ -47,12 +47,11 @@ const CourseList = () => {
     <div >
       <h2 className="h3">Course List</h2>
       {courseList && courseList.map(course=>{
-        console.log('course', course)
         return (<div className="form-wrapper">
           <h3>Title: {course.courseName}</h3>
           <p>Price: {course.coursePrice}</p>
           <iframe width="560" height="315" src={course.courseTrailerUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          <PaypalCheckoutButton course={course} />
+          <PaypalCheckoutButton getCourseList={getCourseList}  course={course} />
         </div>)
       })}
     </div>
